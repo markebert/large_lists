@@ -95,19 +95,15 @@ class MyAppState extends State<MyApp> {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    for (int i = 0; i < 100; i++) {
+                    for (int i = 0; i < 1000; i++) {
                       setState(() {
                         items.addAll(
                             List<int>.generate(1, (i) => items.last + 1 + i));
                       });
                       WidgetsBinding.instance.addPostFrameCallback((_) {
-                        _scrollController.animateTo(
-                          0,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
+                        _scrollController.jumpTo(0);
                       });
-                      await Future.delayed(const Duration(milliseconds: 50));
+                      await Future.delayed(const Duration(milliseconds: 5));
                     }
                   },
                   child: const Text('Add More Data'),
@@ -119,11 +115,7 @@ class MyAppState extends State<MyApp> {
                         items.removeLast();
                       });
                       WidgetsBinding.instance.addPostFrameCallback((_) {
-                        _scrollController.animateTo(
-                          0,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeOut,
-                        );
+                        _scrollController.jumpTo(0);
                       });
                       await Future.delayed(const Duration(milliseconds: 100));
                     }
@@ -139,11 +131,8 @@ class MyAppState extends State<MyApp> {
                       items[randomIndex]++;
                     });
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      _scrollController.animateTo(
-                        250.0 * (items.length - 2 - randomIndex),
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeOut,
-                      );
+                      _scrollController
+                          .jumpTo(250.0 * (items.length - 2 - randomIndex));
                     });
                   },
                   child: const Text('Change Random Data'),
