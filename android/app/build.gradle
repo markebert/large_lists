@@ -23,10 +23,35 @@ if (flutterVersionName == null) {
     flutterVersionName = "1.0"
 }
 
+def flutterCompileSDK = localProperties.getProperty("flutter.compileSdk")
+if (flutterCompileSDK == null) {
+    flutterCompileSDK = "34"
+}
+
+def flutterTargetSDK = localProperties.getProperty("flutter.targetSdk")
+if (flutterTargetSDK == null) {
+    flutterTargetSDK = "34"
+}
+
+def flutterMinSDK = localProperties.getProperty("flutter.minSdk")
+if (flutterMinSDK == null) {
+    flutterMinSDK = "21"
+}
+
+def flutterBuildToolsVersion = localProperties.getProperty("flutter.buildToolsVersion")
+if (flutterBuildToolsVersion == null) {
+    flutterBuildToolsVersion = "35.0.0"
+}
+
+def flutterNDKVersion = localProperties.getProperty("flutter.ndkVersion")
+if (flutterNDKVersion == null) {
+    flutterNDKVersion = "27.0.12077973"
+}
+
 android {
     namespace = "com.example.large_lists"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    compileSdk = flutterCompileSDK.toInteger()
+    ndkVersion = flutterNDKVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
@@ -42,11 +67,11 @@ android {
         applicationId = "com.example.large_lists"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        minSdk = flutterMinSDK.toInteger()
+        targetSdk = flutterTargetSDK.toInteger()
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
-        buildToolsVersion = localProperties.getProperty("flutter.buildToolsVersion")
+        buildToolsVersion = flutterBuildToolsVersion
     }
 
     buildTypes {

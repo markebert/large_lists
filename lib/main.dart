@@ -85,8 +85,7 @@ class MyAppState extends State<MyApp> {
             reverse: true,
             itemCount: items.length,
             prototypeItem: _orderItemTile(items, 0),
-            itemBuilder: (context, index) =>
-                _orderItemTile(items, items.length - 1 - index),
+            itemBuilder: (context, index) => _orderItemTile(items, items.length - 1 - index),
           ),
           bottomNavigationBar: SizedBox(
             height: 100,
@@ -97,8 +96,7 @@ class MyAppState extends State<MyApp> {
                   onPressed: () async {
                     for (int i = 0; i < 1000; i++) {
                       setState(() {
-                        items.addAll(
-                            List<int>.generate(1, (i) => items.last + 1 + i));
+                        items.addAll(List<int>.generate(1, (i) => items.last + 1 + i));
                       });
                       WidgetsBinding.instance.addPostFrameCallback((_) {
                         _scrollController.jumpTo(0);
@@ -125,14 +123,12 @@ class MyAppState extends State<MyApp> {
                 ElevatedButton(
                   onPressed: () async {
                     var randomIndex = Random().nextInt(items.length - 1);
-                    print(
-                        'Changing Index $randomIndex | ${items[randomIndex]}');
+                    print('Changing Index $randomIndex | ${items[randomIndex]}');
                     setState(() {
                       items[randomIndex]++;
                     });
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      _scrollController
-                          .jumpTo(250.0 * (items.length - 2 - randomIndex));
+                      _scrollController.jumpTo(250.0 * (items.length - 2 - randomIndex));
                     });
                   },
                   child: const Text('Change Random Data'),
